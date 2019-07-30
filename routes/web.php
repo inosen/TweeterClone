@@ -11,6 +11,23 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/home', function () {
+    return view('home');
 });
+
+Route::get('/timeline', function () {
+    return view('timeline');
+});
+
+Route::get('/post', function () {
+    return view('post');
+});
+
+Route::get('/profile', function () {
+    return view('profile');
+});
+
+Route::get('/list', function () {
+    return view('list');
+});
+
