@@ -22,7 +22,7 @@
       </li>
     </ul>
     <span style="position:absolute;right:150px;">Hi, Nectarios!</span>
-    <span style="position:absolute;right:50px;" class="ml-2"><a href="home">Logout</a></span>
+    <span style="position:absolute;right:50px;" class="ml-2"><a href="{{ route('logout') }}">Logout</a></span>
   </div>
 
 </nav>
