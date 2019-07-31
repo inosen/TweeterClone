@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\User;
+use App\Follow;
 
 class UserController extends Controller
 {
@@ -38,6 +39,7 @@ class UserController extends Controller
 
     public function logout(){
         
+        //Logout & redirect to the login/register page
         Auth::logout();
         return redirect()->route('home');
 
@@ -45,9 +47,18 @@ class UserController extends Controller
 
     public function profileInfo($username){
 
+        //Find the user with a specific username
         $user = User::where('username',$username)->get();
-        return view('profile',compact('user'));
-        //->orderBy('created_at','desc')
+
+        //Find the followers & the following users
+        $followers = Follow::where('following_id', Auth::id())->count();
+        $following = Follow::where('follower_id', Auth::id())->count();
+        
+        //Check if you have already follow this user
+        $followCheck = Follow::where('following_id', $user[0]->id)->where('follower_id', Auth::id())->count();
+
+        return view('profile',compact('user','followers','following','followCheck'));
+    
     }
 
 }

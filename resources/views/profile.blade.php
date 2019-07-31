@@ -9,10 +9,10 @@
                 <p>Username: <b>{{ $user[0]->username }}</b></p>
                 <p>Email: <b>{{ $user[0]->email }}</b></p>
                 <p>Tweets(posts): <b>{{ $user[0]->posts->count() }}</b></p>
-                <p>Followers: <b>53</b></p>
-                <p>Following: <b>11</b></p>
+                <p>Followers: <b>{{ $followers }}</b></p>
+                <p>Following: <b>{{ $following }}</b></p>
                 @if( $user[0]->id != Auth::id() )
-                <button class="btn btn-primary btn-block" type="button">Follow</button>
+                <button class="btn btn-primary btn-block" type="button">{{ $followCheck > 0 ? 'UnFollow' : 'Follow' }}</button>
                 @endif
             </div>
         </div>
