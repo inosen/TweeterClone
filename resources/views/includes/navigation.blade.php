@@ -9,20 +9,20 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="#">Timeline</a>
+        <a class="nav-link" href="timeline">Timeline</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">My Profile</a>
+        <a class="nav-link" href="profile">User Profile</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Post a tweet</a>
+        <a class="nav-link" href="post">Post a tweet</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Users list</a>
+        <a class="nav-link" href="list">Users list</a>
       </li>
     </ul>
     <span style="position:absolute;right:150px;">Hi, Nectarios!</span>
-    <span style="position:absolute;right:50px;" class="ml-2"><a href="#">Logout</a></span>
+    <span style="position:absolute;right:50px;" class="ml-2"><a href="home">Logout</a></span>
   </div>
 
 </nav>
