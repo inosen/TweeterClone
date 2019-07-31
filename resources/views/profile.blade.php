@@ -6,33 +6,27 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 border rounded mx-auto p-4 mt-4">
-                <p>Username: <b>nestor</b></p>
-                <p>Email: <b>miaritisnestor@gmail.com</b></p>
-                <p>Tweets(posts): <b>32</b></p>
+                <p>Username: <b>{{ $user[0]->username }}</b></p>
+                <p>Email: <b>{{ $user[0]->email }}</b></p>
+                <p>Tweets(posts): <b>{{ $user[0]->posts->count() }}</b></p>
                 <p>Followers: <b>53</b></p>
                 <p>Following: <b>11</b></p>
+                @if( $user[0]->id != Auth::id() )
                 <button class="btn btn-primary btn-block" type="button">Follow</button>
+                @endif
             </div>
         </div>
         <h3 class="text-center mt-4">Personal Posts</h3>
+
+        @foreach($user[0]->posts->sortByDesc('created_at') as $post)
         <div class="row">
             <div class="col-md-6 mx-auto rounded border mt-4">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                Aperiam eligendi dicta ut rerum quam inventore quod nemo 
-                amet temporibus vel repudiandae laudantium pariatur consequatur 
-                quibusdam molestias, officiis ad illum assumenda!</p>
-                <p><a href="#">nestor </a><span>2019-07-22 15:22:33</span></p>
+                <p>{{ $post->body }}</p>
+                <p>{{ $user[0]->username }} <span>{{ $post->created_at }}</span></p>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-6 mx-auto rounded border mt-4">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                Aperiam eligendi dicta ut rerum quam inventore quod nemo 
-                amet temporibus vel repudiandae laudantium pariatur consequatur 
-                quibusdam molestias, officiis ad illum assumenda!</p>
-                <p><a href="#">nestor </a><span>2019-07-22 15:22:33</span></p>
-            </div>
-        </div>
+        @endforeach
+
     </div>
 
 @endsection

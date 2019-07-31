@@ -42,4 +42,12 @@ class UserController extends Controller
         return redirect()->route('home');
 
     }
+
+    public function profileInfo($username){
+
+        $user = User::where('username',$username)->get();
+        return view('profile',compact('user'));
+        //->orderBy('created_at','desc')
+    }
+
 }

@@ -12,7 +12,7 @@
         <a class="nav-link" href="timeline">Timeline</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="profile">User Profile</a>
+        <a class="nav-link" href="/twitterClone/public/profile/{{Auth::user()->username}}">My Profile</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="post">Post a tweet</a>
@@ -21,7 +21,7 @@
         <a class="nav-link" href="list">Users list</a>
       </li>
     </ul>
-    <span style="position:absolute;right:150px;">Hi, Nectarios!</span>
+    <span style="position:absolute;right:150px;">Hi, {{ Auth::user()->username }}!</span>
     <span style="position:absolute;right:50px;" class="ml-2"><a href="{{ route('logout') }}">Logout</a></span>
   </div>
 

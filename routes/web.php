@@ -24,9 +24,9 @@ Route::get('/post', function () {
     return view('post');
 })->name('post');
 
-Route::get('/profile', function () {
-    return view('profile');
-})->name('profile');
+// Route::get('/profile', function () {
+//     return view('profile');
+// })->name('profile');
 
 Route::get('/list', function () {
     return view('list');
@@ -36,4 +36,10 @@ Route::get('/list', function () {
 Route::post('/login', 'UserController@login')->name('login');
 Route::post('/register', 'UserController@register')->name('register');
 Route::get('/logout', 'UserController@logout')->name('logout');
+
+//Post tweet route
+Route::post('/save_post', 'PostController@savePost')->name('save_post');
+
+//Profile page route
+Route::get('/profile/{username}', 'UserController@profileInfo')->name('profile');
 

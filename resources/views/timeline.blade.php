@@ -4,7 +4,7 @@
     @include('includes.navigation')
 
     <div class="container">
-        <h3 class="text-center">Nectarios is following the below users...</h3>
+        <h3 class="text-center">{{ Auth::user()->username }} is following the below users...</h3>
         <div class="row">
             <div class="col-md-6 mx-auto rounded border mt-4">
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
