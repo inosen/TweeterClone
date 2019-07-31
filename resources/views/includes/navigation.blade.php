@@ -9,16 +9,16 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="timeline">Timeline</a>
+        <a class="nav-link" href="/twitterClone/public/timeline">Timeline</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/twitterClone/public/profile/{{Auth::user()->username}}">My Profile</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="post">Post a tweet</a>
+        <a class="nav-link" href="/twitterClone/public/post">Post a tweet</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="list">Users list</a>
+        <a class="nav-link" href="/twitterClone/public/list">Users list</a>
       </li>
     </ul>
     <span style="position:absolute;right:150px;">Hi, {{ Auth::user()->username }}!</span>
