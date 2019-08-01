@@ -16,9 +16,7 @@ Route::get('/home', function () {
     return view('home');
 })->name('home');
 
-Route::get('/timeline', function () {
-    return view('timeline');
-})->name('timeline');
+
 
 Route::get('/post', function () {
     return view('post');
@@ -46,4 +44,7 @@ Route::get('/profile/{username}', 'UserController@profileInfo')->name('profile')
 //Follow - Unfollow URL
 Route::post('/follow','FollowController@followUser')->name('follow');
 Route::post('/unfollow','FollowController@unfollowUser')->name('unfollow');
+
+//Timeline Route
+Route::get('/timeline', 'UserController@timeline')->name('timeline');
 

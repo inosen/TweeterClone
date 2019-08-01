@@ -49,7 +49,7 @@ class UserController extends Controller
 
         //Find the user with a specific username
         $user = User::where('username',$username)->get();
-        
+        //dd($user);
 
         //Find the followers & the following users
         $followers = Follow::where('following_id', $user[0]->id)->count();
@@ -57,9 +57,27 @@ class UserController extends Controller
         
         //Check if you have already follow this user
         $followCheck = Follow::where('following_id', $user[0]->id)->where('follower_id', Auth::id())->count();
-        
+
         return view('profile',compact('user','followers','following','followCheck'));
     
+    }
+
+    public function timeline(){
+
+        $following_ids = Follow::where('follower_id',Auth::id())->get();
+
+        foreach($following_ids as $fid){
+            $users[] = User::where('id',$fid->following_id)->get();
+        }
+
+        if($following_ids->count() > 0){
+            return view('timeline',compact('users','following_ids'));
+        }else{
+            return view('timeline',compact('following_ids'));
+        }
+
+        
+
     }
 
 }

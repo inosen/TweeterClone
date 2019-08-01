@@ -4,27 +4,23 @@
     @include('includes.navigation')
 
     <div class="container">
+        
         <h3 class="text-center">{{ Auth::user()->username }} is following the below users...</h3>
-        <div class="row">
-            <div class="col-md-6 mx-auto rounded border mt-4">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                Aperiam eligendi dicta ut rerum quam inventore quod nemo 
-                amet temporibus vel repudiandae laudantium pariatur consequatur 
-                quibusdam molestias, officiis ad illum assumenda!</p>
-                <p><a href="#">nestor </a><span>2019-07-22 15:22:33</span></p>
-            </div>
-        </div>
 
-        <div class="row">
-            <div class="col-md-6 mx-auto rounded border mt-4">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                Aperiam eligendi dicta ut rerum quam inventore quod nemo 
-                amet temporibus vel repudiandae laudantium pariatur consequatur 
-                quibusdam molestias, officiis ad illum assumenda!</p>
-                <p><a href="#">nestor </a><span>2019-07-22 15:22:33</span></p>
-            </div>
-        </div>
-
+        @if($following_ids->count() > 0)
+        @foreach($users as $user)
+            @foreach($user[0]->posts->sortByDesc('created_at') as $post)
+                <div class="row">
+                    <div class="col-md-6 mx-auto rounded border mt-4">
+                        <p>{{ $post->body }}</p>
+                        <p><a href="#">{{ $user[0]->username }} </a><span>{{ $post->created_at }}</span></p>
+                    </div>
+                </div>
+            @endforeach
+        @endforeach
+        @else
+        <h6 class="text-center mt-3 alert alert-danger">Sorry ..there are no posts to show because you are not following someone yet... :(</h6>
+        @endif
     </div>
 
 @endsection
