@@ -49,14 +49,15 @@ class UserController extends Controller
 
         //Find the user with a specific username
         $user = User::where('username',$username)->get();
+        
 
         //Find the followers & the following users
-        $followers = Follow::where('following_id', Auth::id())->count();
-        $following = Follow::where('follower_id', Auth::id())->count();
+        $followers = Follow::where('following_id', $user[0]->id)->count();
+        $following = Follow::where('follower_id', $user[0]->id)->count();
         
         //Check if you have already follow this user
         $followCheck = Follow::where('following_id', $user[0]->id)->where('follower_id', Auth::id())->count();
-
+        
         return view('profile',compact('user','followers','following','followCheck'));
     
     }

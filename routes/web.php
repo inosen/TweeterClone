@@ -43,3 +43,7 @@ Route::post('/save_post', 'PostController@savePost')->name('save_post');
 //Profile page route
 Route::get('/profile/{username}', 'UserController@profileInfo')->name('profile');
 
+//Follow - Unfollow URL
+Route::post('/follow','FollowController@followUser')->name('follow');
+Route::post('/unfollow','FollowController@unfollowUser')->name('unfollow');
+

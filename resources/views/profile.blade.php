@@ -12,7 +12,11 @@
                 <p>Followers: <b>{{ $followers }}</b></p>
                 <p>Following: <b>{{ $following }}</b></p>
                 @if( $user[0]->id != Auth::id() )
-                <button class="btn btn-primary btn-block" type="button">{{ $followCheck > 0 ? 'UnFollow' : 'Follow' }}</button>
+                    <form action="{{ $followCheck > 0 ? route('unfollow') : route('follow') }}" method="post">@csrf
+                        <input type="hidden" name="follow_id" value="{{ $user[0]->id }}">
+                        <input type="hidden" name="username" value="{{ $user[0]->username }}">
+                        <button class="btn btn-primary btn-block" type="submit">{{ $followCheck > 0 ? 'UnFollow' : 'Follow' }}</button>
+                    </form>
                 @endif
             </div>
         </div>
@@ -28,5 +32,7 @@
         @endforeach
 
     </div>
+
+ 
 
 @endsection

@@ -8,16 +8,23 @@ use Illuminate\Support\Facades\Auth;
 
 class FollowController extends Controller
 {
-    public function followUser($follow_id){
+    public function followUser(Request $request){
 
         $follow = new Follow();
-        $follow->following_id = $follow_id;
+        $follow->following_id = $request->follow_id;
         $follow->follower_id = Auth::id();
         $follow->save();
 
+        return redirect('profile/'.$request->username);
+
     }
 
-    public function unfollowUser(){
+    public function unfollowUser(Request $request){
+
+        $unfollow = Follow::where('follower_id',Auth::id())->where('following_id',$request->follow_id);
+        $unfollow->delete();
+
+        return redirect('profile/'.$request->username);
 
     }
 }
