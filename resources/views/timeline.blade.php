@@ -13,7 +13,7 @@
                 <div class="row">
                     <div class="col-md-6 mx-auto rounded border mt-4">
                         <p>{{ $post->body }}</p>
-                        <p><a href="#">{{ $user[0]->username }} </a><span>{{ $post->created_at }}</span></p>
+                        <p><a href="profile/{{ $user[0]->username }}">{{ $user[0]->username }} </a><span>{{ $post->created_at }}</span></p>
                     </div>
                 </div>
             @endforeach
