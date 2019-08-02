@@ -26,10 +26,6 @@ Route::get('/post', function () {
 //     return view('profile');
 // })->name('profile');
 
-Route::get('/list', function () {
-    return view('list');
-})->name('list');
-
 //Login - Register - Logout Routes
 Route::post('/login', 'UserController@login')->name('login');
 Route::post('/register', 'UserController@register')->name('register');
@@ -47,4 +43,7 @@ Route::post('/unfollow','FollowController@unfollowUser')->name('unfollow');
 
 //Timeline Route
 Route::get('/timeline', 'UserController@timeline')->name('timeline');
+
+//Users List page route
+Route::get('/list', 'UserController@usersList')->name('list');
 

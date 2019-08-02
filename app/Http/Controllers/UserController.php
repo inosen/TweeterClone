@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\User;
@@ -76,7 +77,29 @@ class UserController extends Controller
             return view('timeline',compact('following_ids'));
         }
 
+    }
+
+    public function usersList(){
+
+        //Find all tweeterClone registered Users
+        $users = User::all();
+
+        //Save all follows, followings & followChecks to users collection
+        foreach($users as $user){
+            $followers = Follow::where('following_id', $user->id)->count();
+            $user->setAttribute('followers', $followers);
+
+            $following = Follow::where('follower_id', $user->id)->count();
+            $user->setAttribute('following', $following);
+            //Check if you have already follow this user
+            $followCheck = Follow::where('following_id', $user->id)->where('follower_id', Auth::id())->count();
+            $user->setAttribute('followCheck', $followCheck);
+        }
         
+        //Sort users by followers
+        $users = $users->sortByDesc('followers');
+
+        return view('list',compact('users','followers','following','followCheck'));
 
     }
 
