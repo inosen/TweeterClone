@@ -45,5 +45,5 @@ Route::post('/unfollow','FollowController@unfollowUser')->name('unfollow');
 Route::get('/timeline', 'UserController@timeline')->name('timeline');
 
 //Users List page route
-Route::get('/list', 'UserController@usersList')->name('list');
+Route::get('/list/{page_id}', 'UserController@usersList')->name('list');
 

@@ -18,7 +18,7 @@
         <a class="nav-link" href="/twitterClone/public/post">Post a tweet</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/twitterClone/public/list">Users list</a>
+        <a class="nav-link" href="/twitterClone/public/list/1">Users list</a>
       </li>
     </ul>
     <span style="position:absolute;right:150px;">Hi, {{ Auth::user()->username }}!</span>

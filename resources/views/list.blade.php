@@ -1,3 +1,14 @@
+<?php
+//Custom Pagination Engine
+$no_of_records_per_page = 2;
+$total_rows = $users->count();
+$total_pages = ceil($total_rows / $no_of_records_per_page);
+$end = $page_id * $no_of_records_per_page;
+$start = $end - $no_of_records_per_page + 1;
+$users = $users->whereBetween('id',[$start, $end]);
+
+?>
+
 @extends('layouts.main')
 
 @section('content')
@@ -24,6 +35,16 @@
         @endif
         @endforeach
         
+        <!-- Custom Pagination Controls -->
+        <ul class="pagination">
+            @if( $page_id != 1 )
+            <li class="page-item"><a class="page-link" href="{{ $page_id - 1 }}">Previous</a></li>
+            @endif
+            @if( $page_id != $total_pages )
+            <li class="page-item"><a class="page-link" href="{{ $page_id + 1 }}">Next</a></li>
+            @endif
+        </ul>
+
     </div>
 
 @endsection

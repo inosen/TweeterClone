@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Pagination\LengthAwarePaginator;
 use App\User;
 use App\Follow;
 
@@ -71,6 +72,7 @@ class UserController extends Controller
             $users[] = User::where('id',$fid->following_id)->get();
         }
 
+
         if($following_ids->count() > 0){
             return view('timeline',compact('users','following_ids'));
         }else{
@@ -79,7 +81,7 @@ class UserController extends Controller
 
     }
 
-    public function usersList(){
+    public function usersList($page_id){
 
         //Find all tweeterClone registered Users
         $users = User::all();
@@ -99,7 +101,7 @@ class UserController extends Controller
         //Sort users by followers
         $users = $users->sortByDesc('followers');
 
-        return view('list',compact('users','followers','following','followCheck'));
+        return view('list',compact('users','followers','following','followCheck','page_id'));
 
     }
 
