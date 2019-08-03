@@ -14,7 +14,9 @@ class PostController extends Controller
         if($request->hasFile('image')){
             $path = $request->file('image');
             $filename = time().'.'.$path->getClientOriginalExtension();
-            Image::make($path)->resize(500,250)->save('postImages/'.$filename);
+            Image::make($path)->resize(500, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save('postImages/'.$filename);
         }
 
         //Create a new post record
