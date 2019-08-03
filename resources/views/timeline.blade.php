@@ -12,6 +12,9 @@
             @foreach($user[0]->posts->sortByDesc('created_at') as $post)
                 <div class="row">
                     <div class="col-md-6 mx-auto rounded border mt-4">
+                        @if($post->image != null)
+                        <img src="{{ asset('postImages/'.$post->image) }}" width="500px" height="250px" alt="post image">
+                        @endif
                         <p>{{ $post->body }}</p>
                         <p><a href="profile/{{ $user[0]->username }}">{{ $user[0]->username }} </a><span>{{ $post->created_at }}</span></p>
                     </div>

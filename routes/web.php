@@ -20,7 +20,7 @@ Route::get('/home', function () {
 
 Route::get('/post', function () {
     return view('post');
-})->name('post');
+})->name('post')->middleware('auth');
 
 // Route::get('/profile', function () {
 //     return view('profile');
@@ -29,21 +29,21 @@ Route::get('/post', function () {
 //Login - Register - Logout Routes
 Route::post('/login', 'UserController@login')->name('login');
 Route::post('/register', 'UserController@register')->name('register');
-Route::get('/logout', 'UserController@logout')->name('logout');
+Route::get('/logout', 'UserController@logout')->name('logout')->middleware('auth');
 
 //Post tweet route
-Route::post('/save_post', 'PostController@savePost')->name('save_post');
+Route::post('/save_post', 'PostController@savePost')->name('save_post')->middleware('auth');
 
 //Profile page route
-Route::get('/profile/{username}', 'UserController@profileInfo')->name('profile');
+Route::get('/profile/{username}', 'UserController@profileInfo')->name('profile')->middleware('auth');
 
 //Follow - Unfollow URL
-Route::post('/follow','FollowController@followUser')->name('follow');
-Route::post('/unfollow','FollowController@unfollowUser')->name('unfollow');
+Route::post('/follow','FollowController@followUser')->name('follow')->middleware('auth');
+Route::post('/unfollow','FollowController@unfollowUser')->name('unfollow')->middleware('auth');
 
 //Timeline Route
-Route::get('/timeline', 'UserController@timeline')->name('timeline');
+Route::get('/timeline', 'UserController@timeline')->name('timeline')->middleware('auth');
 
 //Users List page route
-Route::get('/list/{page_id}', 'UserController@usersList')->name('list');
+Route::get('/list/{page_id}', 'UserController@usersList')->name('list')->middleware('auth');
 
