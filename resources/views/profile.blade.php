@@ -6,10 +6,20 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 border rounded mx-auto p-4 mt-4">
-                <img src="" width="250px" alt="profile image">
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+                <img src="{{ asset('avatarImages/'.$user[0]->image) }}" width="250px" alt="profile image">
                 @if($user[0]->id == Auth::id())
-                <form action="" method="post" enctype="multipart/form-data">@csrf
+                <form action="{{ route('avatar') }}" method="post" enctype="multipart/form-data">@csrf
                     <input type="file" name="image" class="form-control">
+                    <input type="hidden" name='id' value='{{ Auth::id() }}'>
                     <button type="submit" class="btn btn-primary btn-block">Upload</button>
                 </form>
                 @endif

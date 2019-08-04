@@ -16,7 +16,7 @@
                         <img src="{{ asset('postImages/'.$post->image) }}" width="500px" alt="post image">
                         @endif
                         <p>{{ $post->body }}</p>
-                        <p><a href="profile/{{ $user[0]->username }}">{{ $user[0]->username }} </a><span>{{ $post->created_at }}</span></p>
+                        <p><img src="{{ asset('avatarImages/'.$user[0]->image) }}" width="50px" alt="profile image"><a href="profile/{{ $user[0]->username }}">{{ $user[0]->username }} </a><span>{{ $post->created_at }}</span></p>
                     </div>
                 </div>
             @endforeach

@@ -6,6 +6,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Intervention\Image\ImageManagerStatic as Image;
 use App\User;
 use App\Follow;
 
@@ -71,7 +72,7 @@ class UserController extends Controller
         foreach($following_ids as $fid){
             $users[] = User::where('id',$fid->following_id)->get();
         }
-
+        //dd($users);
 
         if($following_ids->count() > 0){
             return view('timeline',compact('users','following_ids'));
@@ -102,6 +103,31 @@ class UserController extends Controller
         $users = $users->sortByDesc('followers');
 
         return view('list',compact('users','followers','following','followCheck','page_id'));
+
+    }
+
+    public function avatar(Request $request){
+
+        //Validation rules for the post and the image size
+        $request->validate([
+            'image' => 'required|file|max:1024'
+        ]);
+
+        //Upload & Edit the Image
+        if($request->hasFile('image')){
+            $path = $request->file('image');
+            $filename = time().'.'.$path->getClientOriginalExtension();
+            Image::make($path)->resize(250, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save('avatarImages/'.$filename);
+        }
+
+        $id = $request->id;
+        $user = User::find($id);
+        $user->image = $filename;
+        $user->save();
+
+        return redirect()->route('timeline');
 
     }
 

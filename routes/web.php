@@ -47,3 +47,6 @@ Route::get('/timeline', 'UserController@timeline')->name('timeline')->middleware
 //Users List page route
 Route::get('/list/{page_id}', 'UserController@usersList')->name('list')->middleware('auth');
 
+//Profile Image Upload route
+Route::post('/avatar','UserController@avatar')->name('avatar')->middleware('auth');
+
