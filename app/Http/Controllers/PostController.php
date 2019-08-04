@@ -11,6 +11,14 @@ class PostController extends Controller
 {
     public function savePost(Request $request){
 
+        //Validation rules for the post and the image size
+        $request->validate([
+            'post' => 'required|max:140',
+            'image' => 'required|file|max:1024'
+        ]);
+
+
+        //Upload & Edit the Image
         if($request->hasFile('image')){
             $path = $request->file('image');
             $filename = time().'.'.$path->getClientOriginalExtension();

@@ -6,6 +6,13 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 border rounded mx-auto p-4 mt-4">
+                <img src="" width="250px" alt="profile image">
+                @if($user[0]->id == Auth::id())
+                <form action="" method="post" enctype="multipart/form-data">@csrf
+                    <input type="file" name="image" class="form-control">
+                    <button type="submit" class="btn btn-primary btn-block">Upload</button>
+                </form>
+                @endif
                 <p>Username: <b>{{ $user[0]->username }}</b></p>
                 <p>Email: <b>{{ $user[0]->email }}</b></p>
                 <p>Tweets(posts): <b>{{ $user[0]->posts->count() }}</b></p>

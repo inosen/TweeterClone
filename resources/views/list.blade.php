@@ -21,7 +21,7 @@ $users = $users->whereBetween('id',[$start, $end]);
     @if( $user->id != Auth::id() )
         <div class="row">
             <div class="col-md-6 border rounded mx-auto p-4 mt-4">
-                <p>Username: <b><a href="profile/{{ $user->username }}">{{ $user->username }}</a></b></p>
+                <p>Username: <b><a href="../profile/{{ $user->username }}">{{ $user->username }}</a></b></p>
                 <p>Tweets(posts): <b>{{ $user->posts->count() }}</b></p>
                 <p>Followers: <b>{{ $user->followers }}</b></p>
                 <p>Following: <b>{{ $user->following }}</b></p>
