@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Follow;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendMailable;
 
 class FollowController extends Controller
 {
@@ -14,6 +16,10 @@ class FollowController extends Controller
         $follow->following_id = $request->follow_id;
         $follow->follower_id = Auth::id();
         $follow->save();
+
+        $name = Auth::user()->username;
+        $email = $request->email;
+        Mail::to($email)->send(new SendMailable($name));
 
         return redirect('profile/'.$request->username);
 

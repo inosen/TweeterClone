@@ -32,6 +32,7 @@
                     <form action="{{ $followCheck > 0 ? route('unfollow') : route('follow') }}" method="post">@csrf
                         <input type="hidden" name="follow_id" value="{{ $user[0]->id }}">
                         <input type="hidden" name="username" value="{{ $user[0]->username }}">
+                        <input type="hidden" name="email" value="{{ $user[0]->email }}">
                         <button class="btn btn-primary btn-block" type="submit">{{ $followCheck > 0 ? 'UnFollow' : 'Follow' }}</button>
                     </form>
                 @endif

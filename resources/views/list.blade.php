@@ -29,6 +29,7 @@ $users = $users->whereBetween('id',[$start, $end]);
                 <form action="{{ $user->followCheck > 0 ? route('unfollow') : route('follow') }}" method="post">@csrf
                     <input type="hidden" name="follow_id" value="{{ $user->id }}">
                     <input type="hidden" name="username" value="{{ $user->username }}">
+                    <input type="hidden" name="email" value="{{ $user->email }}">
                     <button class="btn btn-primary btn-block" type="submit">{{ $user->followCheck > 0 ? 'UnFollow' : 'Follow' }}</button>
                 </form>
             </div>
