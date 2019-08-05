@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Intervention\Image\ImageManagerStatic as Image;
 use App\User;
+use App\Post;
 use App\Follow;
 
 class UserController extends Controller
@@ -66,16 +67,32 @@ class UserController extends Controller
     }
 
     public function timeline(){
-
+        
         $following_ids = Follow::where('follower_id',Auth::id())->get();
+        
+        $user = collect(new User);
 
         foreach($following_ids as $fid){
-            $users[] = User::where('id',$fid->following_id)->get();
+            //$users[] = User::where('id',$fid->following_id)->get();
+            $users = User::where('id',$fid->following_id)->get();
+            $user->push($users[0]);
+            
         }
-        //dd($users);
+
+        $post = collect(new Post);
+
+        foreach($user as $usr){
+            foreach($usr->posts as $pst){
+                //$posts = $usr->posts;
+                $post->push($pst);
+            }
+        }
+
+        $post = $post->sortByDesc('created_at');
+        //dd($post[0]->user);
 
         if($following_ids->count() > 0){
-            return view('timeline',compact('users','following_ids'));
+            return view('timeline',compact('post','following_ids'));
         }else{
             return view('timeline',compact('following_ids'));
         }
@@ -98,7 +115,7 @@ class UserController extends Controller
             $followCheck = Follow::where('following_id', $user->id)->where('follower_id', Auth::id())->count();
             $user->setAttribute('followCheck', $followCheck);
         }
-        
+        //dd($users);
         //Sort users by followers
         $users = $users->sortByDesc('followers');
 
