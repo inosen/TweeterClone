@@ -11,25 +11,26 @@
 |
 */
 
+use Illuminate\Support\Facades\Auth;
+
 //Navigation Routes
 Route::get('/home', function () {
     return view('home');
 })->name('home');
 
+//Login - Register - Logout Routes
+Route::post('/login', 'UserController@login')->name('login');
+Route::post('/register', 'UserController@register')->name('register');
 
+//Route Group of Visits(track middleware)
+Route::middleware(['track'])->group(function () {
+
+Route::get('/logout', 'UserController@logout')->name('logout')->middleware('auth');
 
 Route::get('/post', function () {
     return view('post');
 })->name('post')->middleware('auth');
-
-// Route::get('/profile', function () {
-//     return view('profile');
-// })->name('profile');
-
-//Login - Register - Logout Routes
-Route::post('/login', 'UserController@login')->name('login');
-Route::post('/register', 'UserController@register')->name('register');
-Route::get('/logout', 'UserController@logout')->name('logout')->middleware('auth');
+    
 
 //Post tweet route
 Route::post('/save_post', 'PostController@savePost')->name('save_post')->middleware('auth');
@@ -50,3 +51,4 @@ Route::get('/list/{page_id}', 'UserController@usersList')->name('list')->middlew
 //Profile Image Upload route
 Route::post('/avatar','UserController@avatar')->name('avatar')->middleware('auth');
 
+});
