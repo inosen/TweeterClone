@@ -19,16 +19,12 @@ class TrackRouteMiddleware
      */
     public function handle($request, Closure $next)
     {
-        //dump($request->user()->id);
 
         //Record a new route visit.
         $visit = new Visit();
         $visit->url = $request->fullUrl();
         $visit->user_id = $request->user()->id;
         $visit->save();
-
-        
-        
 
         return $next($request);
     }
